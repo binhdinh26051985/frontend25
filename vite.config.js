@@ -10,14 +10,34 @@ export default defineConfig({
         changeOrigin: true,
         secure: false,
         rewrite: (path) => path.replace(/^\/api/, ''),
-        // Add these headers:
+        // Configure CORS headers properly
         headers: {
-          'Access-Control-Allow-Origin': 'http://localhost:5173',
+          'Access-Control-Allow-Origin': '*',
           'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-          'Access-Control-Allow-Headers': 'Content-Type, Authorization'
+          'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With',
+          'Access-Control-Allow-Credentials': 'true'
         }
       }
+    },
+    // Enable CORS for dev server
+    cors: {
+      origin: 'http://localhost:5173',
+      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+      credentials: true
     }
   },
-  base: process.env.NODE_ENV === 'production' ? '/deploy-github/' : '/'
+  // Build configuration
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+    sourcemap: process.env.NODE_ENV !== 'production'
+  },
+  // Base path configuration
+  base: process.env.NODE_ENV === 'production' 
+    ? '/'  // Change this to your production base path if needed
+    : '/',
+  // Environment variables
+  define: {
+    'process.env': process.env
+  }
 });
