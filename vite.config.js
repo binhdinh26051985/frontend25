@@ -34,7 +34,7 @@ export default defineConfig({
   },
   // Base path configuration
   base: process.env.NODE_ENV === 'production' 
-    ? '/'  // Change this to your production base path if needed
+    ? 'https://frontend25-my0qy0ogo-binhdinh26051985s-projects.vercel.app'  // Change this to your production base path if needed
     : '/',
   // Environment variables
   define: {
