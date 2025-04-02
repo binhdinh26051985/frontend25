@@ -12,8 +12,8 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/api/, ''),
         // Configure CORS headers properly
         headers: {
-          //'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Origin': "https://frontend25-steel.vercel.app";
+          'Access-Control-Allow-Origin': '*',
+          //'Access-Control-Allow-Origin': "https://frontend25-steel.vercel.app";
           'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
           'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With',
           'Access-Control-Allow-Credentials': 'true'
@@ -22,7 +22,7 @@ export default defineConfig({
     },
     // Enable CORS for dev server
     cors: {
-      origin: 'http://localhost:5173',
+      origin: 'https://frontend25-steel.vercel.app',
       methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
       credentials: true
     }
@@ -35,7 +35,7 @@ export default defineConfig({
   },
   // Base path configuration
   base: process.env.NODE_ENV === 'production' 
-    ? 'https://frontend25-my0qy0ogo-binhdinh26051985s-projects.vercel.app'  // Change this to your production base path if needed
+    ? 'https://frontend25-steel.vercel.app'  // Change this to your production base path if needed
     : '/',
   // Environment variables
   define: {
