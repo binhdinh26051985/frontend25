@@ -21,7 +21,7 @@ export default defineConfig({
     },
     // Enable CORS for the Vite dev server itself
     cors: {
-      origin: '*', // Or specify your frontend URL: 'https://frontend25-steel.vercel.app'
+      origin:'https://frontend25-steel.vercel.app',
       methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
       credentials: true
     }
