@@ -10,34 +10,37 @@ export default defineConfig({
         changeOrigin: true,
         secure: false,
         rewrite: (path) => path.replace(/^\/api/, ''),
-        // Configure CORS headers properly
+        // Configure CORS headers for the proxy
         headers: {
           'Access-Control-Allow-Origin': '*',
-          //'Access-Control-Allow-Origin': "https://frontend25-steel.vercel.app";
           'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
           'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With',
           'Access-Control-Allow-Credentials': 'true'
         }
       }
     },
-    // Enable CORS for dev server
+    // Enable CORS for the Vite dev server itself
     cors: {
-      origin: 'https://frontend25-steel.vercel.app',
+      origin: '*', // Or specify your frontend URL: 'https://frontend25-steel.vercel.app'
       methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
       credentials: true
     }
   },
-  // Build configuration
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
-    sourcemap: process.env.NODE_ENV !== 'production'
+    sourcemap: process.env.NODE_ENV !== 'production',
+    // Add CORS headers to built assets
+    rollupOptions: {
+      output: {
+        assetFileNames: 'assets/[name]-[hash][extname]',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        entryFileNames: 'assets/[name]-[hash].js'
+      }
+    }
   },
-  // Base path configuration
-  base: process.env.NODE_ENV === 'production' 
-    ? 'https://frontend25-steel.vercel.app'  // Change this to your production base path if needed
-    : '/',
-  // Environment variables
+  // Base path configuration - this should typically be relative
+  base: process.env.NODE_ENV === 'production' ? '/' : '/',
   define: {
     'process.env': process.env
   }
